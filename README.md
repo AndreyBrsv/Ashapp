@@ -8,7 +8,7 @@ Its main feature is a reusable **server setup template**: an administrator accou
 
 Open source under the [MIT license](LICENSE). Targets: Windows x64, macOS Intel and macOS Apple Silicon.
 
-**Version 0.0.14** fixes the blank Manage page after security changes, firewall port review for Docker services, and stale SOCKS5 details after edits in another manager. It retains templates, installation recovery, diagnostics and client exports. Shared AmneziaVPN management remains **experimental** and may not work with your client version. See [release notes](docs/RELEASE_NOTES.md) and [shared-mode limits](docs/AMNEZIA_SHARED.md).
+**Version 0.0.15** marks Firewall protection as experimental. An AmneziaVPN installation has been reported to stop connecting while this protection is enabled; the cause is not yet confirmed. Shared AmneziaVPN management is also experimental. See [release notes](docs/RELEASE_NOTES.md) and [shared-mode limits](docs/AMNEZIA_SHARED.md).
 
 Client `vpn://` links reuse existing device keys, contain no SSH/admin credentials and never grant server-management access. Shared mode uses a real kernel container; discovery/adoption in the official GUI still need independent verification. Host kernel mode and existing deployments remain supported.
 
@@ -16,23 +16,23 @@ Validation must refer to the current source and release run. Earlier successful 
 
 Ashapp installs **AmneziaWG as a Linux kernel module** and/or **VLESS + Reality + XTLS Vision**, manages per-device access and optionally runs an authenticated SOCKS5 proxy in Docker. Both VPN protocols can run on one VPS as independent services. Multiple SSH connections retain independent state, including servers sharing an IP with different SSH ports. The app does not buy VPS instances or run a local VPN tunnel.
 
-For an existing server, use **Manage / Security / Refresh firewall ports** after adding or changing a protocol in AmneziaVPN. Review the actual port list before applying it. The firewall checkbox represents the saved Ashapp policy; its effective rule verification is shown separately. A successful SSH confirmation does not prove VPN reachability.
+**Firewall protection is experimental.** A reported AmneziaVPN tunnel can remain connecting while the firewall is enabled. If this occurs, reconnect via SSH, clear **Manage / Security / Firewall protection**, and apply the change. If SSH is unavailable, use the VPS provider console for recovery. Rule verification and successful SSH confirmation do not prove VPN reachability. When testing, record whether the AmneziaWG UDP port appears in the reviewed firewall preview.
 
-## Download v0.0.14
+## Download v0.0.15
 
-**v0.0.14 fixes existing-server management, firewall review and SOCKS5 state.** The versioned links below become available only as each target finishes validation and publication; the release page shows the uploaded assets. See [update behavior and validation limits](docs/UPDATES.md).
+**v0.0.15 adds an experimental firewall warning and recovery guidance. The reported AmneziaVPN connectivity issue remains unresolved.** The versioned links below become available only as each target finishes validation and publication; the release page shows the uploaded assets. See [update behavior and validation limits](docs/UPDATES.md).
 
 This repository and its releases are **public**. Windows, macOS Intel and macOS Apple Silicon publish independently after their own checks succeed. Each ready target has its own checksum file; combined `SHA256SUMS` appears after all three finish. A source ZIP is not an application installer.
 
 | Computer | Installer | Complete portable archive |
 | --- | --- | --- |
-| Windows 10/11 x64 | [Install Windows](https://github.com/AndreyBrsv/Ashapp/releases/download/v0.0.14/Ashapp-v0.0.14-windows-x64-setup.exe) | [ZIP](https://github.com/AndreyBrsv/Ashapp/releases/download/v0.0.14/Ashapp-v0.0.14-windows-x64.zip) |
-| macOS 12+, Intel | [Install / maintain macOS Intel](https://github.com/AndreyBrsv/Ashapp/releases/download/v0.0.14/Ashapp-v0.0.14-macos-x64-maintenance.dmg) | [ZIP](https://github.com/AndreyBrsv/Ashapp/releases/download/v0.0.14/Ashapp-v0.0.14-macos-x64.zip) |
-| macOS 12+, Apple Silicon | [Install / maintain macOS Apple Silicon](https://github.com/AndreyBrsv/Ashapp/releases/download/v0.0.14/Ashapp-v0.0.14-macos-arm64-maintenance.dmg) | [ZIP](https://github.com/AndreyBrsv/Ashapp/releases/download/v0.0.14/Ashapp-v0.0.14-macos-arm64.zip) |
+| Windows 10/11 x64 | [Install Windows](https://github.com/AndreyBrsv/Ashapp/releases/download/v0.0.15/Ashapp-v0.0.15-windows-x64-setup.exe) | [ZIP](https://github.com/AndreyBrsv/Ashapp/releases/download/v0.0.15/Ashapp-v0.0.15-windows-x64.zip) |
+| macOS 12+, Intel | [Install / maintain macOS Intel](https://github.com/AndreyBrsv/Ashapp/releases/download/v0.0.15/Ashapp-v0.0.15-macos-x64-maintenance.dmg) | [ZIP](https://github.com/AndreyBrsv/Ashapp/releases/download/v0.0.15/Ashapp-v0.0.15-macos-x64.zip) |
+| macOS 12+, Apple Silicon | [Install / maintain macOS Apple Silicon](https://github.com/AndreyBrsv/Ashapp/releases/download/v0.0.15/Ashapp-v0.0.15-macos-arm64-maintenance.dmg) | [ZIP](https://github.com/AndreyBrsv/Ashapp/releases/download/v0.0.15/Ashapp-v0.0.15-macos-arm64.zip) |
 
-[Release page](https://github.com/AndreyBrsv/Ashapp/releases/tag/v0.0.14) · [SHA256SUMS](https://github.com/AndreyBrsv/Ashapp/releases/download/v0.0.14/SHA256SUMS) · [Matching source](https://github.com/AndreyBrsv/Ashapp/releases/download/v0.0.14/Ashapp-v0.0.14-source.zip)
+[Release page](https://github.com/AndreyBrsv/Ashapp/releases/tag/v0.0.15) · [SHA256SUMS](https://github.com/AndreyBrsv/Ashapp/releases/download/v0.0.15/SHA256SUMS) · [Matching source](https://github.com/AndreyBrsv/Ashapp/releases/download/v0.0.15/Ashapp-v0.0.15-source.zip)
 
-Checksums for independently ready targets: [Windows](https://github.com/AndreyBrsv/Ashapp/releases/download/v0.0.14/Ashapp-v0.0.14-windows-x64-SHA256SUMS), [macOS Intel](https://github.com/AndreyBrsv/Ashapp/releases/download/v0.0.14/Ashapp-v0.0.14-macos-x64-SHA256SUMS), [macOS Apple Silicon](https://github.com/AndreyBrsv/Ashapp/releases/download/v0.0.14/Ashapp-v0.0.14-macos-arm64-SHA256SUMS).
+Checksums for independently ready targets: [Windows](https://github.com/AndreyBrsv/Ashapp/releases/download/v0.0.15/Ashapp-v0.0.15-windows-x64-SHA256SUMS), [macOS Intel](https://github.com/AndreyBrsv/Ashapp/releases/download/v0.0.15/Ashapp-v0.0.15-macos-x64-SHA256SUMS), [macOS Apple Silicon](https://github.com/AndreyBrsv/Ashapp/releases/download/v0.0.15/Ashapp-v0.0.15-macos-arm64-SHA256SUMS).
 
 **Windows:** run Setup and open Ashapp from the Start menu. For the portable ZIP instead, extract the entire archive and open `ashapp.exe`; keep its DLLs and `data` directory beside it. If a runtime is missing, install the official [Microsoft Visual C++ x64 Redistributable](https://aka.ms/vs/17/release/vc_redist.x64.exe); see [Microsoft's documentation](https://learn.microsoft.com/en-us/cpp/windows/latest-supported-vc-redist). Flutter, Python, Docker and C++ Build Tools are not required on the computer running the packaged app. The Windows application is not Authenticode-signed.
 
@@ -43,13 +43,13 @@ Checksums for independently ready targets: [Windows](https://github.com/AndreyBr
 Download the ZIP and its platform-specific checksum file from the same release. Combined `SHA256SUMS` is an alternative after every target finishes. In PowerShell, compare the output with its checksum line:
 
 ```powershell
-Get-FileHash .\Ashapp-v0.0.14-windows-x64.zip -Algorithm SHA256
+Get-FileHash .\Ashapp-v0.0.15-windows-x64.zip -Algorithm SHA256
 ```
 
 On macOS, put the ZIP and checksum file in one directory:
 
 ```sh
-shasum -a 256 --check --ignore-missing Ashapp-v0.0.14-macos-arm64-SHA256SUMS
+shasum -a 256 --check --ignore-missing Ashapp-v0.0.15-macos-arm64-SHA256SUMS
 ```
 
 A checksum detects changed bytes. It does not independently prove the builder's identity or that the binary matches reviewed source. Each archive also has a `.build.json` release asset identifying its source commit, SDK, dependency lockfile hash, installer hash and CI run. Inspect that run and compare its commit with the release tag and matching source archive.
@@ -57,7 +57,7 @@ A checksum detects changed bytes. It does not independently prove the builder's 
 Public release builds publish [GitHub artifact attestations](https://docs.github.com/en/actions/how-tos/secure-your-work/use-artifact-attestations/use-artifact-attestations) when the workflow supports them. Check the matching tag and build manifest. For a build that actually published an attestation, use the [GitHub CLI](https://cli.github.com/):
 
 ```sh
-gh attestation verify Ashapp-v0.0.14-windows-x64.zip --repo AndreyBrsv/Ashapp
+gh attestation verify Ashapp-v0.0.15-windows-x64.zip --repo AndreyBrsv/Ashapp
 ```
 
 Inspect the reported source commit and compare it with the release tag and build manifest. Public CI makes the build process inspectable; byte-for-byte reproducible builds are not claimed. GitHub workflow attestations require no private signing keys in this repository.
@@ -76,9 +76,9 @@ The shared [Ashapp logo and desktop icons](branding/README.md) use the warm Carb
 
 ## App updates
 
-If the v0.0.8 Windows installer reports that the app constant is not initialized, install v0.0.14 manually from the link above. Existing local data is preserved; no uninstall or data reset is needed. CI now smoke-tests install/repair/uninstall in an isolated directory without starting the application.
+If the v0.0.8 Windows installer reports that the app constant is not initialized, install v0.0.15 manually from the link above. Existing local data is preserved; no uninstall or data reset is needed. CI now smoke-tests install/repair/uninstall in an isolated directory without starting the application.
 
-**v0.0.8** adds **Restart and update**, Windows Setup maintenance choices and macOS maintenance disks. Updating preserves local data and reopens the installed app after success. System security/administrator prompts remain. The first update from v0.0.7 still uses its old installer handoff; use **Restart and update** in installed v0.0.9 to update to v0.0.14. The new source does not establish a completed real installation test.
+**v0.0.8** adds **Restart and update**, Windows Setup maintenance choices and macOS maintenance disks. Updating preserves local data and reopens the installed app after success. System security/administrator prompts remain. The first update from v0.0.7 still uses its old installer handoff; use **Restart and update** in installed v0.0.9 to update to v0.0.15. The new source does not establish a completed real installation test.
 
 Windows Setup offers **Update / repair** or **Uninstall**. macOS users can open **Ashapp Setup** in the maintenance DMG for the same choices; the PKG remains available for older updaters. An unchecked option also removes this user's local settings and protected passwords. Older installed versions need one update before full-data removal is available. VPS servers and files exported elsewhere remain unchanged. Installation/removal and credential-retention behavior still require manual end-to-end validation.
 

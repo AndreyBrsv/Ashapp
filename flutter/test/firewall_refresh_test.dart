@@ -52,6 +52,12 @@ void main() {
     expect(find.text('Refresh firewall ports?'), findsOneWidget);
     expect(find.textContaining('Preserved TCP ports: [22]'), findsOneWidget);
     expect(
+      find.textContaining(
+        'Experimental: firewall protection may prevent VPN or SSH connections.',
+      ),
+      findsOneWidget,
+    );
+    expect(
       active.server.calls.where((call) => call.$1 == 'security-stage'),
       isEmpty,
     );

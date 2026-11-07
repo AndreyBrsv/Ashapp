@@ -10,6 +10,22 @@ import 'private_export.dart';
 import 'private_qr.dart';
 import 'amnezia_connection.dart';
 
+/// Keep the firewall's known connectivity limitation visible before changes.
+class FirewallExperimentalWarning extends StatelessWidget {
+  const FirewallExperimentalWarning({super.key});
+
+  @override
+  Widget build(BuildContext context) => Padding(
+    padding: const EdgeInsets.only(top: 8, bottom: 12),
+    child: Text(
+      'Experimental: Firewall protection may prevent VPN or SSH connections. '
+      'If this happens, clear the firewall checkbox and apply changes in Manage → Security. '
+      'If SSH is unavailable, use your VPS provider’s console for recovery.',
+      style: TextStyle(color: Theme.of(context).colorScheme.error),
+    ),
+  );
+}
+
 class SectionCard extends StatelessWidget {
   const SectionCard({
     super.key,

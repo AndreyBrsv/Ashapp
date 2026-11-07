@@ -1,4 +1,8 @@
-Ashapp v0.0.14
+Ashapp v0.0.15
+
+Firewall protection is experimental. A user reported that an AmneziaVPN tunnel remains connecting while firewall protection is enabled and works after it is disabled. The exact cause is not yet confirmed, and this release does not claim to fix the connection failure. If this happens, clear Firewall protection in Manage / Security and apply changes. If SSH is unavailable, use your VPS provider console for recovery. SSH confirmation and matching firewall rules do not verify the VPN handshake.
+
+The wizard, template editor, review screen, security panel and confirmation now display this warning. Previously released v0.0.14 fixes remain included.
 
 Fix the blank Manage page after applying changes to an existing server. Installation-journal expansion state now has separate, server-scoped storage keys instead of colliding with the page scroll offset. Compact-window and multi-server regressions cover the security confirmation and journal refresh flow.
 

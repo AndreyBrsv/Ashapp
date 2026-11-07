@@ -14,6 +14,70 @@ import 'support/fakes.dart';
 
 void main() {
   testWidgets(
+    'experimental firewall warning is shown in management and setup',
+    (tester) async {
+      tester.view.physicalSize = const Size(420, 600);
+      tester.view.devicePixelRatio = 1;
+      tester.platformDispatcher.textScaleFactorTestValue = 1.5;
+      addTearDown(tester.view.resetPhysicalSize);
+      addTearDown(tester.view.resetDevicePixelRatio);
+      addTearDown(tester.platformDispatcher.clearTextScaleFactorTestValue);
+      final h = Harness();
+      addTearDown(h.vm.dispose);
+      await h.vm.connect(
+        const ConnectionDetails(
+          host: '203.0.113.10',
+          port: 22,
+          user: 'alice',
+          password: 'synthetic-warning-placeholder',
+        ),
+        (_, _) async => true,
+      );
+      await tester.pumpWidget(
+        MaterialApp(
+          home: Scaffold(
+            body: SingleChildScrollView(child: SecurityPanel(controller: h.vm)),
+          ),
+        ),
+      );
+      expect(
+        find.textContaining('Experimental: Firewall protection may prevent'),
+        findsOneWidget,
+      );
+      expect(find.textContaining('provider’s console'), findsOneWidget);
+      expect(tester.takeException(), isNull);
+      await tester.pumpWidget(
+        MaterialApp(
+          home: SetupWizard(
+            controller: h.vm,
+            editTemplate: true,
+            initial: ServerTemplate(
+              name: 'Security warning',
+              blockPing: false,
+              disableRoot: false,
+              installAwg: false,
+              installSocks: false,
+              awgPort: 585,
+              clientNames: [],
+              createAdmin: false,
+            ),
+          ),
+        ),
+      );
+      for (var step = 0; step < 2; step++) {
+        await tester.tap(find.widgetWithText(FilledButton, 'Continue'));
+        await tester.pumpAndSettle();
+      }
+      expect(find.text('Configure firewall'), findsOneWidget);
+      expect(
+        find.textContaining('Experimental: Firewall protection may prevent'),
+        findsOneWidget,
+      );
+      expect(tester.takeException(), isNull);
+    },
+  );
+
+  testWidgets(
     'a connected-server template retains its explicitly imported key',
     (tester) async {
       final h = Harness();

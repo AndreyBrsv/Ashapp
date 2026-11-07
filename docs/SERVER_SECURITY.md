@@ -4,7 +4,7 @@ Ashapp v0.0.7 adds explicit security choices for Ubuntu 22.04/24.04 and Debian 1
 
 ## Defaults and management
 
-New setups/templates recommend **Protect SSH with Fail2ban** and **Configure firewall**. Existing serialized templates acquire neither automatically. Adding a network service behind an existing Ashapp firewall requires a reviewed allowlist refresh. **Automatic security updates**, **Disable password SSH login** and SSH-key generation default to off. Unselected setup choices preserve existing policy. Management changes can explicitly turn Ashapp settings on or off.
+New setups/templates select **Protect SSH with Fail2ban** and **Configure firewall** by default. **Firewall protection is experimental:** an AmneziaVPN tunnel has been reported to stop connecting when enabled, and the cause remains unconfirmed. Disable and apply the firewall choice if VPN access fails; if SSH is unavailable, use the provider console for recovery. Existing serialized templates acquire neither automatically. Adding a network service behind an existing Ashapp firewall requires a reviewed allowlist refresh. **Automatic security updates**, **Disable password SSH login** and SSH-key generation default to off. Unselected setup choices preserve existing policy. Management changes can explicitly turn Ashapp settings on or off.
 
 Use **Manage → Security → Run diagnostics** for the selected IP/SSH port. Unknown status is not healthy or simply off. Draft controls do not change the server until **Review and apply changes** is confirmed. Provider firewalls remain separate.
 

@@ -639,6 +639,7 @@ class _SetupWizardState extends State<SetupWizard> {
           configureFirewall,
           (v) => configureFirewall = v,
         ),
+        const FirewallExperimentalWarning(),
         toggle(
           'Disable password SSH login',
           'All users. Requires a verified key saved in the OS vault. Off by default.',
@@ -887,6 +888,7 @@ class _SetupWizardState extends State<SetupWizard> {
             _review('Disable root SSH login', disableRoot),
             _review('Protect SSH with Fail2ban', protectSsh),
             _review('Configure firewall', configureFirewall),
+            if (configureFirewall) const FirewallExperimentalWarning(),
             _review('Automatic security updates', automaticUpdates),
             _review('Disable password SSH login', disablePasswords),
             _review('Generate a server SSH key', generateKey),

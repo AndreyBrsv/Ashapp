@@ -78,6 +78,7 @@ class _SecurityPanelState extends State<SecurityPanel> {
         'Preserved TCP ports: ${ports['tcp']}\nPreserved UDP ports: ${ports['udp']}\n'
         'Docker publications: ${plan['docker_ports'] ?? 'Unknown; firewall protection is not being enabled'}\n'
         '${plan['notice']}\n\n'
+        '${selected['firewall'] == true ? 'Experimental: firewall protection may prevent VPN or SSH connections. If this happens, disable it in Manage → Security; use the provider console if SSH is unavailable.\n\n' : ''}'
         'Turning protection off removes Ashapp settings. External policy may remain active. '
         'Turning SSH restrictions off restores the original policy. The server’s original policy may still restrict those login methods.',
       )) {
@@ -176,13 +177,14 @@ class _SecurityPanelState extends State<SecurityPanel> {
           'Preserve existing ports and policy. Disabling removes only Ashapp firewall rules.',
           firewall?['managed'] == true ? true : firewall?['enabled'] as bool?,
         ),
+        const FirewallExperimentalWarning(),
         if (firewall?['managed'] == true) ...[
           Text(
             'Effective firewall protection: ${firewall?['enabled'] == true
-                ? 'Verified'
+                ? 'Rules match the saved policy'
                 : firewall?['enabled'] == false
                 ? 'Needs review'
-                : 'Unknown'}. The checkbox controls the saved Ashapp policy.',
+                : 'Unknown'}. VPN connectivity is not verified. The checkbox controls the saved Ashapp policy.',
           ),
           if (firewall?['error'] != null) Text(firewall!['error'].toString()),
           const Padding(
